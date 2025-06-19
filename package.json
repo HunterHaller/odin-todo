@@ -1,0 +1,30 @@
+{
+  "name": "odin-todo",
+  "version": "1.0.0",
+  "description": "To-do list project as [assigned](https://www.theodinproject.com/lessons/node-path-javascript-todo-list) in [The Odin Project](https://www.theodinproject.com).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HunterHaller/odin-todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HunterHaller/odin-todo/issues"
+  },
+  "homepage": "https://github.com/HunterHaller/odin-todo#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
