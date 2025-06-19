@@ -1,4 +1,4 @@
-import "./styles.css"; 
-import { module } from "./module.js";
+import "./styles.css";
+import { greeting } from "./greeting.js";
 
-console.log(module);
+console.log(greeting);
