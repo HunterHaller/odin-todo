@@ -2,4 +2,6 @@
 
 export const greeting = "Hello, Odinite!";
 
-export function domUpdate(element, 
+export function domUpdate(){
+    
+}

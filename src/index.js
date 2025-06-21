@@ -2,6 +2,7 @@
 //Loosely coupled modules do not directly talk to and see each other.
 
 import "./styles.css";
-import { greeting } from "./js-modules/dom-update.js";
+//import { Task } from "./js-modules/task-class.js";
+import { initialList } from "./js-modules/list-manager.js";
 
-console.log(greeting);
+initialList();
