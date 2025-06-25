@@ -1,7 +1,23 @@
 import { Task } from "./task-class.js";
 import { Project } from "./project-class.js";
 
-let allProjects = [];
+export let allProjects = [{title: "The List", tasks: null}];
+export let allTasks = [];
+
+console.log(allProjects)
+
+localStorage.clear();
+
+if (!localStorage.getItem("allProjects")){
+    console.log("Adding allProjects to storage for the first time!");
+    console.log("Locally, allProjects = " + allProjects)
+    localStorage.setItem("allProjects", JSON.stringify(allProjects));
+    console.log("Pulled from storage, allProjects reads as " + JSON.parse(localStorage.getItem("allProjects")));
+} else {
+    console.log("allProjects found in local storage!");
+    allProjects = JSON.parse(localStorage.getItem("allProjects"));
+    console.log("Pulled from storage, local copy of allProjects contains " + allProjects);
+}
 
 //makeList()
 //This function creates an empty array that will be parsed into the DOM as
@@ -14,8 +30,10 @@ function makeProject(projectName){
     console.log("New project created with name " + newProject.title)
 
     //Add that list to global list of projects
-    allProjects.push(newProject);
+    //allProjects.push(newProject);
     console.log("allProjects now contains " + allProjects[0].title)
+
+    localStorage.setItem("allProjects", allProjects);
 
     return newProject;
 }
@@ -23,14 +41,15 @@ function makeProject(projectName){
 //addTask()
 //This function adds a task with label "taskName" to the list identified by
 //  "targetList"
-//function addTask(targetList, targetTask){
+function addTask(targetList, targetTask){
     //Find list with name "targetList"
     //Add task with label "taskName" to that list.
     //Note that task is an object! Tasks will need to be objects, and be able
     //  to be stored in json.
-    //targetList.push(targetTask);
-    //console.log("List now contains " + targetList)
-//}
+    //targetList.taskList.push(targetTask);
+    allTasks.push(targetTask);
+    console.log("List now contains " + targetList);
+}
 
 //initialList()
 //This function always runs on pageload and checks whether the user has any
@@ -45,11 +64,13 @@ export function initialList() {
         const defaultTask = new Task("defaultList", "Do Laundry", "Gotta wash those clothes!", "May 5, 2027", "HIGH");
         console.log("Default task declared with title '" + defaultTask.title + "'");
 
+        addTask(defaultList, defaultTask);
+
         localStorage.setItem("defaultList", JSON.stringify(defaultList));
         localStorage.setItem("defaultList1", JSON.stringify(defaultTask));
         console.log(JSON.parse(localStorage.getItem("defaultList")));
-        console.log(JSON.parse(localStorage.getItem("defaultList1")));
+        console.log("The task as parsed from storage: " + JSON.parse(localStorage.getItem("defaultList1")));
 
-        console.log(defaultTask);
+        console.log("Just the task object itself: " + defaultTask);
     }
 };

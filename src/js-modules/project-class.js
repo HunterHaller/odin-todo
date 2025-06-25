@@ -10,6 +10,6 @@
 export class Project {
     constructor (title){
         this.title = title;
-        this.taskList = [];
+        //this.taskList = [];
     }
 }
