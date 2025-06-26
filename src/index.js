@@ -3,8 +3,9 @@
 
 import "./styles.css";
 //import { Task } from "./js-modules/task-class.js";
-import { initialList, allProjects } from "./js-modules/list-manager.js";
+import { initialList, allProjects, allTasks } from "./js-modules/list-manager.js";
 import { addHeader } from "./js-modules/dom-update.js";
+import { updateDOM } from "./js-modules/dom-update.js";
 
 localStorage.clear();
 let username;
@@ -27,35 +28,4 @@ if ((username == null) || (username == "")){
 }
 
 addHeader(username);
-
-
-
-
-
-//ARRAY EXPERIMENT
-if (!localStorage.getItem("myArray")){
-    console.log("ARRAY EXPERIMENT")
-    let myArray = [];
-    localStorage.setItem("myArray", myArray);
-    console.log("in code array: " + myArray);
-    console.log("in storage array: " + localStorage.getItem("myArray"));
-    myArray.push(localStorage.getItem("defaultList"));
-    myArray.push(localStorage.getItem("defaultList1"));
-    localStorage.setItem("myArray", myArray);
-    console.log("in code array: " + myArray);
-    console.log("in storage array: " + localStorage.getItem("myArray"));
-    console.log(JSON.parse(localStorage.getItem("defaultList")));
-    console.log(JSON.parse(localStorage.getItem("defaultList1")));
-}
-
-console.log("INDEX.JS ALLPROJECTS EXPERIMENT");
-if (!localStorage.getItem("allProjects")){
-    console.log("Adding allProjects to storage for the first time!");
-    localStorage.setItem("allProjects", JSON.stringify(allProjects));
-    console.log("Pulled from storage, allProjects reads as " + JSON.parse(localStorage.getItem("allProjects")));
-} else {
-    console.log("allProjects found in local storage!");
-    console.log("Before, pulling, allProjects locally = " + allProjects)
-    allProjects = JSON.parse(localStorage.getItem("allProjects"));
-    console.log("Pulled from storage, local copy of allProjects contains " + allProjects);
-}
+updateDOM();
