@@ -1,22 +1,20 @@
 import { Task } from "./task-class.js";
 import { Project } from "./project-class.js";
+import { allProjects, allTasks, updateStorageProjectsTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
 
-export let allProjects = [];
-export let allTasks = [];
+//localStorage.clear();
 
-console.log(allProjects)
-
-localStorage.clear();
+console.log("allP and allT have been imported. Printing:");
+console.log("allProjects local = " + allProjects);
 
 if (!localStorage.getItem("allProjects")){
     console.log("Adding allProjects to storage for the first time!");
-    console.log("Locally, allProjects = " + allProjects)
-    localStorage.setItem("allProjects", allProjects);
-    console.log("Pulled from storage, allProjects reads as " + localStorage.getItem("allProjects"));
+    //console.log("Locally, allProjects = " + allProjects)
+    //console.log("Pulled from storage, allProjects reads as " + localStorage.getItem("allProjects"));
 } else {
-    console.log("allProjects found in local storage!");
-    allProjects = JSON.parse(localStorage.getItem("allProjects"));
-    console.log("Pulled from storage, local copy of allProjects contains " + allProjects);
+    console.log("allProjects found in local storage! As it exists there, it's " + localStorage.getItem("allProjects"));
+    updateInstanceProjectsTasks();
+    //console.log("Pulled from storage, local copy of allProjects contains " + allProjects);
 }
 
 //makeProject()
@@ -31,18 +29,17 @@ function makeProject(projectName){
 
     //Add that list to global list of projects
     allProjects.push(newProject.title);
-    console.log("allProjects contents: " + allProjects)
+    console.log("allProjects contents: " + allProjects);
 
-    console.log("Stringifying allProjects into storage...")
-    localStorage.setItem("allProjects", JSON.stringify(allProjects));
+    console.log("Putting allProjects into storage...");
+    updateStorageProjectsTasks();
     console.log("Pulled from storage, allProjects reads as " + JSON.parse(localStorage.getItem("allProjects")));
 
     return newProject;
 }
 
-//addTask()
-//This function adds a task with label "taskName" to the list identified by
-//  "targetList"
+//addTask - This function adds a task with label "taskName" to the list 
+// identified by "targetList"
 function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority){
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
@@ -50,7 +47,7 @@ function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority
     console.log("Task declared with title '" + newTask.title + "'");
     
     allTasks.push(newTask.id); //add this new task's unique ID to the allTasks array
-    localStorage.setItem("allTasks", allTasks);
+    updateStorageProjectsTasks();
 
     taskProject.taskList.push(newTask.id);
     console.log("List " + taskProject.title + " now contains task with ID " + taskProject.taskList[0]);

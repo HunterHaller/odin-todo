@@ -1,5 +1,5 @@
 // domUpdate.js
-import { allProjects, allTasks } from "./list-manager";
+import { allProjects, allTasks } from "./storage-manager.js";
 
 export function addHeader(usernameText) {
     let usernameHeader = document.createElement("h1");
@@ -7,10 +7,20 @@ export function addHeader(usernameText) {
     document.querySelector("#headerDiv").appendChild(usernameHeader);
 }
 
+function clearDOM() {
+    document.querySelector("#projectsDiv").textContent = "";
+}
+
 export function updateDOM() {
+
+    clearDOM();
 
     console.log("Starting updateDOM()");
     console.log("At present, allProjects contains " + allProjects);
+
+    console.log("Array lengths:")
+    console.log(allProjects.length);
+    console.log(allTasks.length);
 
     allProjects.forEach((project) => {
         let projectsDiv = document.querySelector("#projectsDiv");

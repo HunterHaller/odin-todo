@@ -2,12 +2,11 @@
 //Loosely coupled modules do not directly talk to and see each other.
 
 import "./styles.css";
-//import { Task } from "./js-modules/task-class.js";
-import { initialList, allProjects, allTasks } from "./js-modules/list-manager.js";
+import { initialList } from "./js-modules/list-manager.js";
 import { addHeader } from "./js-modules/dom-update.js";
 import { updateDOM } from "./js-modules/dom-update.js";
+import { updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
 
-localStorage.clear();
 let username;
 
 //If the page is being loaded for the first time,
@@ -19,7 +18,10 @@ if (!localStorage.getItem("username")){
     console.log("Creating default list and task...");
     initialList(); //create the default list
 } else {
+    console.log("Username already set! User has been here before. Setting instance copy of username to " + localStorage.getItem("username"));
     username = localStorage.getItem("username");
+    updateInstanceProjectsTasks();
+    console.log("Successfully updated local lists of projects and tasks! Proceeding to render...");
 }
 
 if ((username == null) || (username == "")){
