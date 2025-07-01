@@ -7,3 +7,11 @@ body {
 h1 {
   text-align: center;
 }
+
+.completed {
+  text-decoration: line-through;
+}
+
+img{
+  filter: invert();
+}

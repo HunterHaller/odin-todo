@@ -35,9 +35,6 @@ export function updateDOM() {
 
         projectsDiv.appendChild(newProjectDiv);
         newProjectDiv.appendChild(newProjectHeader);
-
-
-        //projectsDiv.appendChild(renderedProject);
     });
 
     allTasks.forEach((taskID) => {
@@ -55,6 +52,7 @@ export function updateDOM() {
 
         let newTaskHeader = document.createElement("h3");
         newTaskHeader.textContent = newTaskObj.title;
+        newTaskHeader.setAttribute("class", "task");
 
         parentDiv.appendChild(newTaskHeader);
     })

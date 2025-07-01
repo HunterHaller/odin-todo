@@ -22,7 +22,7 @@ if (!localStorage.getItem("allProjects")){
 //  an empty (at first) to-do list that can be added to. It also adds the list
 //  to a list of to-do lists.
 //  Returns an empty array.
-function makeProject(projectName){
+export function makeProject(projectName){
     //Declare a new project with name "projectName"
     let newProject = new Project(projectName);
     console.log("New project created with name " + newProject.title)

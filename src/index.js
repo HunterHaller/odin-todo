@@ -2,10 +2,13 @@
 //Loosely coupled modules do not directly talk to and see each other.
 
 import "./styles.css";
+import { startEventListeners } from "./js-modules/event-listeners.js";
 import { initialList } from "./js-modules/list-manager.js";
 import { addHeader } from "./js-modules/dom-update.js";
 import { updateDOM } from "./js-modules/dom-update.js";
 import { updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
+
+//localStorage.clear();
 
 let username;
 
@@ -31,3 +34,4 @@ if ((username == null) || (username == "")){
 
 addHeader(username);
 updateDOM();
+startEventListeners();
