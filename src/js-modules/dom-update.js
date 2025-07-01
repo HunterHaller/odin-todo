@@ -1,5 +1,6 @@
 // domUpdate.js
 import { allProjects, allTasks } from "./storage-manager.js";
+import trashIcon from "../img/trash-can.svg";
 
 export function addHeader(usernameText) {
     let usernameHeader = document.createElement("h1");
@@ -41,7 +42,6 @@ export function updateDOM() {
 
         console.log("Working with task ID " + taskID);
 
-        let newRenderedTask = document.createElement("div");
         let newTaskObj = JSON.parse(localStorage.getItem(taskID));
 
         console.log(newTaskObj)
@@ -50,10 +50,36 @@ export function updateDOM() {
 
         let parentDiv = document.querySelector("#" + newTaskObj.project.title);
 
-        let newTaskHeader = document.createElement("h3");
-        newTaskHeader.textContent = newTaskObj.title;
-        newTaskHeader.setAttribute("class", "task");
+        let newTaskDiv = document.createElement("div");
+        newTaskDiv.setAttribute("class", "task");
 
-        parentDiv.appendChild(newTaskHeader);
+        let newTaskCheckbox = document.createElement("input");
+        newTaskCheckbox.setAttribute("type", "checkbox");
+        newTaskCheckbox.setAttribute("id", newTaskObj.title);
+        newTaskCheckbox.setAttribute("name", newTaskObj.title);
+        newTaskCheckbox.setAttribute("onclick", newTaskObj.id + ".toggleComplete()");
+        newTaskCheckbox.setAttribute("class", "taskCheckbox")
+        
+        if (newTaskObj.complete == true){
+            newTaskCheckbox.setAttribute("checked", "");
+        }
+
+        switch (newTaskObj.priority){
+            case "LOW":
+                newTaskCheckbox.setAttribute("class", "lowPriority");
+        }
+
+        let newTaskLabel = document.createElement("label");
+        newTaskLabel.textContent = newTaskObj.title;
+        newTaskLabel.setAttribute("for", newTaskObj.title);
+        
+        const newTaskDeleteButton = document.createElement("img");
+        newTaskDeleteButton.src = trashIcon;
+        newTaskDeleteButton.setAttribute("class", "trashIcon");
+
+        parentDiv.appendChild(newTaskDiv);
+        newTaskDiv.appendChild(newTaskCheckbox);
+        newTaskDiv.appendChild(newTaskLabel);
+        newTaskDiv.appendChild(newTaskDeleteButton);
     })
 }

@@ -35,6 +35,8 @@ export function makeProject(projectName){
     updateStorageProjectsTasks();
     console.log("Pulled from storage, allProjects reads as " + JSON.parse(localStorage.getItem("allProjects")));
 
+    localStorage.setItem(newProject.title, JSON.stringify(newProject));
+
     return newProject;
 }
 
@@ -72,7 +74,6 @@ export function initialList() {
 
         let anotherList = makeProject("Another Project");
 
-        localStorage.setItem(defaultList.title, defaultList.taskList);
         console.log("List " + defaultList.title + "'s taskList in localStorage: " + localStorage.getItem(defaultList.title));
         
         localStorage.setItem(defaultTask1.id, JSON.stringify(defaultTask1));

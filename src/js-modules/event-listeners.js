@@ -17,5 +17,15 @@ export function startEventListeners() {
             makeProject(newListName);
             updateDOM();
         }
+    });
+
+    let projectsDiv = document.querySelector("#projectsDiv");
+    projectsDiv.addEventListener("click", (e) => {
+        let target = e.target;
+        console.log("You clicked on a " + target.className);
+
+        if (target.className == "trashIcon"){
+            
+        }
     })
 }

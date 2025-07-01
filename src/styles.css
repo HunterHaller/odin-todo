@@ -8,10 +8,23 @@ h1 {
   text-align: center;
 }
 
+.project{}
+
+.task{
+}
+
 .completed {
   text-decoration: line-through;
 }
 
 img{
   filter: invert();
+  height: 100px;
+  position: sticky;
+  top: 20px;
+}
+
+.trashIcon {
+  display: inline;
+  height: 20px;
 }
