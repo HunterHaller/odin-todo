@@ -1,6 +1,7 @@
 // domUpdate.js
 import { allProjects, allTasks } from "./storage-manager.js";
 import trashIcon from "../img/trash-can.svg";
+import { Task } from "./task-class.js";
 
 export function addHeader(usernameText) {
     let usernameHeader = document.createElement("h1");
@@ -11,6 +12,12 @@ export function addHeader(usernameText) {
 function clearDOM() {
     document.querySelector("#projectsDiv").textContent = "";
 }
+
+function completeTask(taskObj, domElement) {
+    console.log("Toggling task " + taskObj.title + "...");
+    taskObj.toggleComplete();
+    domElement.classList.toggle("completed")
+};
 
 export function updateDOM() {
 
@@ -38,23 +45,19 @@ export function updateDOM() {
 
         console.log("Working with task ID " + taskID);
 
-        let newTaskObj = JSON.parse(localStorage.getItem(taskID));
+        let newTaskStrings = JSON.parse(localStorage.getItem(taskID));
 
-        console.log(newTaskObj)
+        let newTaskObj = new Task(newTaskStrings.project, newTaskStrings.title, newTaskStrings.id, newTaskStrings.description, newTaskStrings.dueDate, newTaskStrings.priority)
 
-        console.log("Acquired task with title " + newTaskObj.title);
+        console.log("Full new task parameters:")
+        console.log(newTaskObj);
 
         let parentDiv = document.querySelector("#" + newTaskObj.project.title);
 
         let newTaskDiv = document.createElement("div");
         newTaskDiv.setAttribute("class", "task");
 
-        let newTaskCheckbox = document.createElement("input");
-        newTaskCheckbox.setAttribute("type", "checkbox");
-        newTaskCheckbox.setAttribute("id", newTaskObj.title);
-        newTaskCheckbox.setAttribute("name", newTaskObj.title);
-        newTaskCheckbox.setAttribute("onclick", newTaskObj.id + ".toggleComplete()");
-        newTaskCheckbox.setAttribute("class", "taskCheckbox")
+        let newTaskCheckbox = document.createElement("input")
 
         switch (newTaskObj.priority){
             case "LOW":
@@ -67,12 +70,22 @@ export function updateDOM() {
         
         const newTaskDeleteButton = document.createElement("img");
         newTaskDeleteButton.src = trashIcon;
-        newTaskDeleteButton.setAttribute("class", "trashIcon");
+        newTaskDeleteButton.setAttribute("class", "trashIcon " + newTaskObj.id);
+;
+        newTaskCheckbox.setAttribute("type", "checkbox");
+        newTaskCheckbox.setAttribute("id", newTaskObj.title);
+        newTaskCheckbox.setAttribute("name", newTaskObj.title);
+        newTaskCheckbox.onclick = function() {
+            completeTask(newTaskObj, newTaskDiv);
+        }
+        newTaskCheckbox.setAttribute("class", "taskCheckbox");
 
         if (newTaskObj.complete == true){
             console.log("Task already done! Pre-checking box...");
             newTaskCheckbox.setAttribute("checked", "");
-            newTaskDiv.setAttribute("class", "completed");
+            newTaskDiv.classList.toggle("completed");
+        } else {
+            console.log("Task not done yet!")
         }
 
         parentDiv.appendChild(newTaskDiv);

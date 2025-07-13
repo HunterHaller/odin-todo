@@ -52,6 +52,8 @@ function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority
     console.log("Full task readout below:");
     console.log(newTask);
 
+    localStorage.setItem(newTask.id, JSON.stringify(newTask));
+
     return newTask;
 }
 
@@ -61,22 +63,13 @@ function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority
 //  first usage of the page), this function creates an initial list called "My
 //  First List" and adds a default task to it.
 export function initialList() {
-    //If nothing in broswerstorage:
+    //If nothing in browserstorage:
     if (!localStorage.getItem("defaultList")){
         //let myFirstList = makeList("My First List")
         let defaultList = makeProject("Default"); //declare a new list called Default
-        let defaultTask1 = addTask(defaultList, "Do Laundry", "Gotta wash those clothes!", "May 5, 2027", "HIGH");
-        let defaultTask2 = addTask(defaultList, "Wash dishes", "Gotta wash those dishes!", "May 6, 2027", "LOW");
-        defaultTask1.toggleComplete();
-
-        let anotherList = makeProject("Another Project");
+        addTask(defaultList, "Do Laundry", "Gotta wash those clothes!", "May 5, 2027", "HIGH");
+        addTask(defaultList, "Wash dishes", "Gotta wash those dishes!", "May 6, 2027", "LOW");
 
         console.log("List " + defaultList.title + "'s taskList in localStorage: " + localStorage.getItem(defaultList.title));
-        
-        localStorage.setItem(defaultTask1.id, JSON.stringify(defaultTask1));
-        localStorage.setItem(defaultTask2.id, JSON.stringify(defaultTask2));
-        console.log("The task as parsed from storage: " + JSON.parse(localStorage.getItem(defaultTask1.id)));
-
-        console.log("Just the task object itself: " + defaultTask1);
     }
 };
