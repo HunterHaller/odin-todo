@@ -2,7 +2,7 @@ import { Task } from "./task-class.js";
 import { Project } from "./project-class.js";
 import { allProjects, allTasks, updateStorageProjectsTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
 
-//localStorage.clear();
+localStorage.clear();
 
 console.log("allP and allT have been imported. Printing:");
 console.log("allProjects local = " + allProjects);
@@ -18,10 +18,6 @@ if (!localStorage.getItem("allProjects")){
 }
 
 //makeProject()
-//This function creates an empty array that will be parsed into the DOM as
-//  an empty (at first) to-do list that can be added to. It also adds the list
-//  to a list of to-do lists.
-//  Returns an empty array.
 export function makeProject(projectName){
     //Declare a new project with name "projectName"
     let newProject = new Project(projectName);
@@ -45,7 +41,7 @@ export function makeProject(projectName){
 function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority){
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
-    const newTask = new Task(taskProject, taskTitle, crypto.randomUUID(), taskDescription, taskDate, taskPriority);
+    const newTask = new Task(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskDate, taskPriority);
     console.log("Task declared with title '" + newTask.title + "'");
     
     allTasks.push(newTask.id); //add this new task's unique ID to the allTasks array
@@ -71,6 +67,7 @@ export function initialList() {
         let defaultList = makeProject("Default"); //declare a new list called Default
         let defaultTask1 = addTask(defaultList, "Do Laundry", "Gotta wash those clothes!", "May 5, 2027", "HIGH");
         let defaultTask2 = addTask(defaultList, "Wash dishes", "Gotta wash those dishes!", "May 6, 2027", "LOW");
+        defaultTask1.toggleComplete();
 
         let anotherList = makeProject("Another Project");
 

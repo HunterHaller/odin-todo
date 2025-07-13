@@ -10,6 +10,7 @@ export class Task {
     }
 
     toggleComplete() {
+        console.log("Toggling completion of task " + this.title);
         if (this.complete == false) {
             this.complete = true;
             console.log("Congratulations! You completed the '" + this.title + "' task!");

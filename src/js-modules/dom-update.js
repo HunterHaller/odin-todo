@@ -19,10 +19,6 @@ export function updateDOM() {
     console.log("Starting updateDOM()");
     console.log("At present, allProjects contains " + allProjects);
 
-    console.log("Array lengths:")
-    console.log(allProjects.length);
-    console.log(allTasks.length);
-
     allProjects.forEach((project) => {
         let projectsDiv = document.querySelector("#projectsDiv");
         console.log("Rendering project " + project + "...")
@@ -59,10 +55,6 @@ export function updateDOM() {
         newTaskCheckbox.setAttribute("name", newTaskObj.title);
         newTaskCheckbox.setAttribute("onclick", newTaskObj.id + ".toggleComplete()");
         newTaskCheckbox.setAttribute("class", "taskCheckbox")
-        
-        if (newTaskObj.complete == true){
-            newTaskCheckbox.setAttribute("checked", "");
-        }
 
         switch (newTaskObj.priority){
             case "LOW":
@@ -76,6 +68,12 @@ export function updateDOM() {
         const newTaskDeleteButton = document.createElement("img");
         newTaskDeleteButton.src = trashIcon;
         newTaskDeleteButton.setAttribute("class", "trashIcon");
+
+        if (newTaskObj.complete == true){
+            console.log("Task already done! Pre-checking box...");
+            newTaskCheckbox.setAttribute("checked", "");
+            newTaskDiv.setAttribute("class", "completed");
+        }
 
         parentDiv.appendChild(newTaskDiv);
         newTaskDiv.appendChild(newTaskCheckbox);
