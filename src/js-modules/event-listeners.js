@@ -2,10 +2,15 @@ import { makeProject } from "./list-manager";
 import { allProjects } from "./storage-manager";
 import { updateDOM } from "./dom-update";
 import { allTasks } from "./storage-manager";
+import { addTask } from "./list-manager";
 import { updateStorageProjectsTasks } from "./storage-manager";
 
 export function startEventListeners() {
     let newProjButton = document.querySelector("#newProjButton");
+    let newTaskButton = document.querySelector("#newTaskButton");
+    const dialogForm = document.querySelector("#newTaskDialog");
+    const taskSubmitButton = document.querySelector("submitTaskButton");
+
     newProjButton.addEventListener("click", function () {
         let newListName = prompt("Enter a name for your new project:", "My Project");
         for (let i = 0; i < allProjects.length; i++) {
@@ -20,6 +25,23 @@ export function startEventListeners() {
             updateDOM();
         }
     });
+
+    newTaskButton.addEventListener("click", function () {
+        //Clicking this button opens the new task dialog
+        dialogForm.show();
+    });
+
+    submitTaskButton.addEventListener("click", function () {
+        const newTitle = document.querySelector("#title").value;
+        const newDate = document.querySelector("#dueDate").value;
+        const newPriority = document.querySelector("#priority").value;
+        const newDescription = document.querySelector("#description").checked;
+        const newAssignedProject = document.querySelector("#projectSelect").value;
+
+        addTask(newAssignedProject, newTitle, newDescription, newDate, newPriority);
+
+        updateDOM();
+    })
 
     let projectsDiv = document.querySelector("#projectsDiv");
     projectsDiv.addEventListener("click", (e) => {
@@ -41,7 +63,7 @@ export function startEventListeners() {
             const allTasksIndex = allTasks.indexOf(thisTask);
             if (allTasksIndex > -1) { // only splice array when item is found
                 console.log("Confirmed task is in allTasks list, removing now...");
-                allTasks.splice(allTasksIndex, 1); // 2nd parameter means remove one item only
+                allTasks.splice(allTasksIndex, 1); // find task in allTasks and remove it
                 updateDOM();
                 updateStorageProjectsTasks();
                 localStorage.removeItem(thisTask);

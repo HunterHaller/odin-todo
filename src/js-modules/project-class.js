@@ -12,9 +12,4 @@ export class Project {
         this.title = title;
         this.taskList = []; //an array containing the IDs of all tasks that belong to this list
     }
-
-    checkFunction() {
-        console.log("2 + 2 = " + 4);
-        return 4;
-    }
 }

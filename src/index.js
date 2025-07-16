@@ -6,15 +6,12 @@ import { startEventListeners } from "./js-modules/event-listeners.js";
 import { initialList } from "./js-modules/list-manager.js";
 import { addHeader } from "./js-modules/dom-update.js";
 import { updateDOM } from "./js-modules/dom-update.js";
-import { updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
-
-//localStorage.clear();
+import { allTasks, allProjects, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
 
 let username;
 
 //If the page is being loaded for the first time,
-if (!localStorage.getItem("username")){
-    //localStorage.setItem("firstRun", false); //create a localStorage flag to tell us that the app has been instantiated
+if (!localStorage.getItem("returningUser")){
     username = prompt("Enter your username:", "Hunter");
     localStorage.setItem("username", username);
 
@@ -25,6 +22,7 @@ if (!localStorage.getItem("username")){
     username = localStorage.getItem("username");
     updateInstanceProjectsTasks();
     console.log("Successfully updated local lists of projects and tasks! Proceeding to render...");
+    console.log("To test, allProjects = " + allProjects)
 }
 
 if ((username == null) || (username == "")){
