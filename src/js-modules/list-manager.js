@@ -2,7 +2,7 @@ import { Task } from "./task-class.js";
 //import { Project } from "./project-class.js";
 import { allProjects, allTasks, updateStorageProjectsTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
 
-localStorage.clear();
+//localStorage.clear();
 
 console.log("allP and allT have been imported. Printing:");
 console.log("allProjects local = " + allProjects);

@@ -9,8 +9,8 @@ export function updateStorageProjectsTasks(){
 
 export function updateInstanceProjectsTasks(){
     console.log("STORAGE-MANAGER: Loading allProjects and allTasks into instance from localStorage...");
-    allProjects = JSON.parse(localStorage.getItem(allProjects));
-    allTasks = JSON.parse(localStorage.getItem(allTasks));
+    allProjects = JSON.parse(localStorage.getItem("allProjects"));
+    allTasks = JSON.parse(localStorage.getItem("allTasks"));
 
     console.log("STORAGE-MANAGER: Locally, allProjects = " + allProjects)
 }

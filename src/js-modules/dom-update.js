@@ -22,9 +22,6 @@ function completeTask(taskObj, domElement) {
 export function updateDOM() {
 
     clearProjectsDiv();
-    
-    console.log("Starting updateDOM()");
-    console.log("At present, allProjects contains " + allProjects);
 
     let projectsDiv = document.querySelector("#projectsDiv");
     let dropdownProjects = document.querySelector("#projectSelect");
