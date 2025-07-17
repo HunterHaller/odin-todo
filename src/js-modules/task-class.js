@@ -11,9 +11,11 @@ export class Task {
 
     toggleComplete() {
         console.log("Toggling completion of task " + this.title);
+        console.log("Current completion status: " + this.complete)
         if (this.complete == false) {
             this.complete = true;
             console.log("Congratulations! You completed the '" + this.title + "' task!");
+            console.log("New completion status: " + this.complete);
         } else {
             this.complete = false;
             console.log("Task reopened. Back to the mines, eh?");

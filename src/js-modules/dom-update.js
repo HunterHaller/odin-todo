@@ -17,6 +17,8 @@ function completeTask(taskObj, domElement) {
     console.log("Toggling task " + taskObj.title + "...");
     taskObj.toggleComplete();
     domElement.classList.toggle("completed")
+
+    localStorage.setItem(taskObj.id, JSON.stringify(taskObj));
 };
 
 export function updateDOM() {
@@ -27,8 +29,6 @@ export function updateDOM() {
     let dropdownProjects = document.querySelector("#projectSelect");
 
     allProjects.forEach((project) => {
-
-        console.log("Rendering project " + project + "...")
 
         let newProjectDiv = document.createElement("div");
         newProjectDiv.setAttribute("class", "project");
@@ -42,7 +42,6 @@ export function updateDOM() {
 
         //Also add project to the dropdown list for adding new tasks
         if (!document.querySelector("#" + project.replaceAll(" ", "") + "InList")) {
-            console.log(project + " isn't present in dialog, adding now...");
 
             let newProjectOption = document.createElement("option");
             newProjectOption.textContent = project;
@@ -61,9 +60,19 @@ export function updateDOM() {
 
         console.log("Working with task ID " + taskID);
 
-        let newTaskStrings = JSON.parse(localStorage.getItem(taskID));
+        //this retrieves the stored version of the task object, which is NOT a Task object
+        let newTaskBasicObj = JSON.parse(localStorage.getItem(taskID));
+        console.log(newTaskBasicObj);
 
-        let newTaskObj = new Task(newTaskStrings.project, newTaskStrings.title, newTaskStrings.id, newTaskStrings.description, newTaskStrings.dueDate, newTaskStrings.priority)
+        //converts the stored regular object into a proper Task object
+        let newTaskObj = new Task(newTaskBasicObj.project, newTaskBasicObj.title, newTaskBasicObj.id, newTaskBasicObj.description, newTaskBasicObj.dueDate, newTaskBasicObj.priority)
+
+        //I forgot that in creating a new Task, the "complete" flag always gets set to false.
+        //This should fix it:
+        if (newTaskBasicObj.complete == true){
+            newTaskObj.complete = true;
+        }
+
 
         console.log("Full new task parameters:")
         console.log(newTaskObj);
@@ -96,6 +105,8 @@ export function updateDOM() {
         }
         newTaskCheckbox.setAttribute("class", "taskCheckbox");
 
+
+        //Check if task is already complete. If so, precheck checkbox and give appropriate class
         if (newTaskObj.complete == true) {
             console.log("Task already done! Pre-checking box...");
             newTaskCheckbox.setAttribute("checked", "");
