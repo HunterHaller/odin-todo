@@ -7,9 +7,8 @@
 //NOTE: Storage only works with strings.
 //  For objects and arrays, use JSON.stringify()
 
-export class Project {
-    constructor (title){
-        this.title = title;
-        this.taskList = []; //an array containing the IDs of all tasks that belong to this list
-    }
+export function createProject(title) {
+    const taskList = []; //an array containing the IDs of all tasks that belong to this list
+
+    return { title, taskList }
 }

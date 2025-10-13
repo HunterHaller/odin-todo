@@ -1,14 +1,17 @@
 // domUpdate.js
 import { allProjects, allTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
 import trashIcon from "../img/trash-can.svg";
-import { Task } from "./task-class.js";
+import { createTask } from "./task-factory.js";
 
+
+//addHeader: Creates a header element that uses the user's provided name and appends it to the DOM.
 export function addHeader(usernameText) {
     let usernameHeader = document.createElement("h1");
     usernameHeader.textContent = "Welcome, " + usernameText + "! What needs doing today?";
     document.querySelector("#headerDiv").appendChild(usernameHeader);
 }
 
+//clearProjectsDiv: Wipes the div containing all projects clean.
 function clearProjectsDiv() {
     document.querySelector("#projectsDiv").textContent = "";
 }
@@ -16,7 +19,7 @@ function clearProjectsDiv() {
 function completeTask(taskObj, domElement) {
     console.log("Toggling task " + taskObj.title + "...");
     taskObj.toggleComplete();
-    domElement.classList.toggle("completed")
+    domElement.classList.toggle("completed");
 
     localStorage.setItem(taskObj.id, JSON.stringify(taskObj));
 };
@@ -62,10 +65,9 @@ export function updateDOM() {
 
         //this retrieves the stored version of the task object, which is NOT a Task object
         let newTaskBasicObj = JSON.parse(localStorage.getItem(taskID));
-        console.log(newTaskBasicObj);
 
         //converts the stored regular object into a proper Task object
-        let newTaskObj = new Task(newTaskBasicObj.project, newTaskBasicObj.title, newTaskBasicObj.id, newTaskBasicObj.description, newTaskBasicObj.dueDate, newTaskBasicObj.priority)
+        let newTaskObj = createTask(newTaskBasicObj.project, newTaskBasicObj.title, newTaskBasicObj.id, newTaskBasicObj.description, newTaskBasicObj.dueDate, newTaskBasicObj.priority)
 
         //I forgot that in creating a new Task, the "complete" flag always gets set to false.
         //This should fix it:
@@ -73,20 +75,30 @@ export function updateDOM() {
             newTaskObj.complete = true;
         }
 
-
-        console.log("Full new task parameters:")
-        console.log(newTaskObj);
-
         let parentDiv = document.querySelector("#" + newTaskObj.project.replaceAll(" ", ""));
 
         let newTaskDiv = document.createElement("div");
-        newTaskDiv.setAttribute("class", "task");
+        newTaskDiv.classList.add("task");
 
         let newTaskCheckbox = document.createElement("input")
 
+        console.log("This task's priority is " + newTaskObj.priority);
+        //Assign appropriate priority class
         switch (newTaskObj.priority) {
             case "LOW":
-                newTaskCheckbox.setAttribute("class", "lowPriority");
+                newTaskDiv.classList.add("lowPriority");
+                break;
+            case "NORMAL":
+                newTaskDiv.classList.add("normalPriority");
+                break;
+            case "HIGH":
+                newTaskDiv.classList.add("highPriority");
+                break;
+            default:
+                console.log("No priority declared for task '" + newTaskObj.title + "', setting to NORMAL.");
+                newTaskObj.priority = "NORMAL";
+                newTaskDiv.classList.add("normalPriority");
+                break;
         }
 
         let newTaskLabel = document.createElement("label");
@@ -115,9 +127,17 @@ export function updateDOM() {
             console.log("Task not done yet!")
         }
 
+        let newTaskDate = document.createElement("p");
+        newTaskDate.textContent = newTaskObj.dueDate;
+
+        let newTaskDescription = document.createElement("p");
+        newTaskDescription.textContent = newTaskObj.description;
+
         parentDiv.appendChild(newTaskDiv);
         newTaskDiv.appendChild(newTaskCheckbox);
         newTaskDiv.appendChild(newTaskLabel);
         newTaskDiv.appendChild(newTaskDeleteButton);
+        newTaskDiv.appendChild(newTaskDate);
+        newTaskDiv.appendChild(newTaskDescription);
     })
 }

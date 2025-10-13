@@ -7,6 +7,7 @@ import { initialList } from "./js-modules/list-manager.js";
 import { addHeader } from "./js-modules/dom-update.js";
 import { updateDOM } from "./js-modules/dom-update.js";
 import { allTasks, allProjects, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
+import { createTask } from "./js-modules/task-factory.js";
 
 let username;
 

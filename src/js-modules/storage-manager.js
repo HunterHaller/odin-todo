@@ -1,10 +1,11 @@
-export let allProjects = [];
+export let allProjects = []; //These are both initially empty, but filled later.
 export let allTasks = [];
 
 export function updateStorageProjectsTasks(){
     console.log("STORAGE-MANAGER: Updating localStorage copies of allProjects and allTasks...")
     localStorage.setItem("allProjects", JSON.stringify(allProjects));
     localStorage.setItem("allTasks", JSON.stringify(allTasks));
+    console.log("Successfully saved projects and tasks to localStorage.");
 }
 
 export function updateInstanceProjectsTasks(){
@@ -12,5 +13,5 @@ export function updateInstanceProjectsTasks(){
     allProjects = JSON.parse(localStorage.getItem("allProjects"));
     allTasks = JSON.parse(localStorage.getItem("allTasks"));
 
-    console.log("STORAGE-MANAGER: Locally, allProjects = " + allProjects)
+    console.log("STORAGE-MANAGER: Locally, allProjects now contains: " + allProjects);
 }

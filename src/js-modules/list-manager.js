@@ -1,8 +1,7 @@
-import { Task } from "./task-class.js";
-//import { Project } from "./project-class.js";
+import { createTask } from "./task-factory.js";
 import { allProjects, allTasks, updateStorageProjectsTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
 
-//localStorage.clear();
+// localStorage.clear();
 
 console.log("allP and allT have been imported. Printing:");
 console.log("allProjects local = " + allProjects);
@@ -33,7 +32,7 @@ export function makeProject(projectName) {
 export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority) {
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
-    const newTask = new Task(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskDate, taskPriority);
+    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskMonth, taskDay, taskYear, taskPriority);
     console.log("Task declared with title '" + newTask.title + "'");
 
     allTasks.push(newTask.id); //add this new task's unique ID to the allTasks array

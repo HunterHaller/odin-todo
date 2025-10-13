@@ -9,7 +9,7 @@ export function startEventListeners() {
     let newProjButton = document.querySelector("#newProjButton");
     let newTaskButton = document.querySelector("#newTaskButton");
     const dialogForm = document.querySelector("#newTaskDialog");
-    const taskSubmitButton = document.querySelector("submitTaskButton");
+    const submitTaskButton = document.querySelector("#submitTaskButton");
 
     newProjButton.addEventListener("click", function () {
         let newListName = prompt("Enter a name for your new project:", "My Project");
@@ -28,7 +28,7 @@ export function startEventListeners() {
 
     newTaskButton.addEventListener("click", function () {
         //Clicking this button opens the new task dialog
-        dialogForm.show();
+        dialogForm.showModal();
     });
 
     submitTaskButton.addEventListener("click", function () {
@@ -53,12 +53,9 @@ export function startEventListeners() {
 
             let thisTask = target.classList[1];
             console.log("This trash belongs to id " + thisTask);
-            const storedTask = localStorage.getItem(thisTask);
 
-            const objToDelete = JSON.parse(storedTask);
-            //let objToDelete = localStorage.getItem(thisTask);
-            let objProject = objToDelete.project.title;
-            console.log("Retrieved task " + objToDelete.title + " which is in project " + objProject)
+            const objToDelete = JSON.parse(localStorage.getItem(thisTask));
+            console.log("Retrieved task " + objToDelete.title + " which is in project " + objToDelete.project)
 
             const allTasksIndex = allTasks.indexOf(thisTask);
             if (allTasksIndex > -1) { // only splice array when item is found
