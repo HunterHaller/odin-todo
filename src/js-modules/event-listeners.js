@@ -13,15 +13,20 @@ export function startEventListeners() {
 
     newProjButton.addEventListener("click", function () {
         let newListName = prompt("Enter a name for your new project:", "My Project");
+        let listIterations = 0;
         for (let i = 0; i < allProjects.length; i++) {
-            if (newListName == allProjects[i]) {
-                newListName = newListName + "(1)";
+            if (allProjects[i].includes(newListName)) {
+                listIterations++;
             }
         }
         if ((newListName == null) || (newListName == "")) {
             console.log("Project creation cancelled");
         } else {
-            makeProject(newListName);
+            if (listIterations < 1) {
+                makeProject(newListName);
+            } else {
+                makeProject(newListName + " (" + listIterations + ")")
+            }
             updateDOM();
         }
     });
@@ -47,6 +52,16 @@ export function startEventListeners() {
     projectsDiv.addEventListener("click", (e) => {
         let target = e.target;
         console.log("You clicked on a " + target.className);
+
+        if (target.classList.contains("downIcon")) {
+            target.classList.toggle("collapsed");
+            var content = target.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
 
         if (target.classList.contains("trashIcon")) {
             console.log("Trash time!")

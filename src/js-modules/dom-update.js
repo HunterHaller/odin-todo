@@ -1,6 +1,7 @@
 // domUpdate.js
-import { allProjects, allTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
+import { allProjects, allTasks } from "./storage-manager.js";
 import trashIcon from "../img/trash-can.svg";
+import downIcon from "../img/down.png";
 import { createTask } from "./task-factory.js";
 
 
@@ -18,17 +19,14 @@ function clearProjectsDiv() {
 
 //completeTask: When a checkbox is clicked, toggle the completion status of the attached task.
 function completeTask(taskObj, domElement) {
-    console.log("Toggling task " + taskObj.title + "...");
-    console.log("Task completion status before toggling: " + taskObj.completion);
     taskObj.toggleComplete();
     domElement.classList.toggle("completed");
 
     localStorage.setItem(taskObj.id, JSON.stringify(taskObj));
 };
 
-export function updateDOM() {
-
-    clearProjectsDiv();
+//populateProjects: Create divs in the DOM for each project that is currently stored.
+function populateProjects() {
 
     let projectsDiv = document.querySelector("#projectsDiv");
     let dropdownProjects = document.querySelector("#projectSelect");
@@ -46,7 +44,10 @@ export function updateDOM() {
         newProjectDiv.appendChild(newProjectHeader);
 
         //Also add project to the dropdown list for adding new tasks
-        if (!document.querySelector("#" + project.replaceAll(" ", "") + "InList")) {
+        let projectIDName = project.replaceAll(" ", "");
+        projectIDName = projectIDName.replaceAll("(", "");
+        projectIDName = projectIDName.replaceAll(")", "");
+        if (!document.querySelector("#" + projectIDName + "InList")) {
 
             let newProjectOption = document.createElement("option");
             newProjectOption.textContent = project;
@@ -60,6 +61,11 @@ export function updateDOM() {
             console.log("Item already present in dialog! Skipping...")
         }
     });
+}
+
+//populateTasks: Create divs in the DOM for each task currently stored and place them in their respsective projects.
+function populateTasks() {
+    let dropdownProjects = document.querySelector("#projectSelect");
 
     allTasks.forEach((taskID) => {
 
@@ -110,7 +116,11 @@ export function updateDOM() {
         const newTaskDeleteButton = document.createElement("img");
         newTaskDeleteButton.src = trashIcon;
         newTaskDeleteButton.setAttribute("class", "trashIcon " + newTaskObj.id);
-        ;
+        
+        const newTaskDownButton = document.createElement("img");
+        newTaskDownButton.src = downIcon;
+        newTaskDownButton.setAttribute("class", "downIcon " + newTaskObj.id);
+
         newTaskCheckbox.setAttribute("type", "checkbox");
         newTaskCheckbox.setAttribute("id", newTaskObj.title);
         newTaskCheckbox.setAttribute("name", newTaskObj.title);
@@ -129,17 +139,37 @@ export function updateDOM() {
             console.log("Task not done yet!")
         }
 
-        let newTaskDate = document.createElement("p");
-        newTaskDate.textContent = newTaskObj.dueDate;
-
         let newTaskDescription = document.createElement("p");
         newTaskDescription.textContent = newTaskObj.description;
+
+        let newTaskCreated = document.createElement("p");
+        newTaskCreated.textContent = newTaskObj.timeSinceCreated();
+
+        let newTaskDate = document.createElement("p");
+        newTaskDate.textContent = newTaskObj.printStandardDate();
+
+        let collapsibleDiv = document.createElement("div");
 
         parentDiv.appendChild(newTaskDiv);
         newTaskDiv.appendChild(newTaskCheckbox);
         newTaskDiv.appendChild(newTaskLabel);
-        newTaskDiv.appendChild(newTaskDeleteButton);
         newTaskDiv.appendChild(newTaskDate);
-        newTaskDiv.appendChild(newTaskDescription);
-    })
+        newTaskDiv.appendChild(newTaskDownButton);
+
+        newTaskDiv.appendChild(collapsibleDiv);
+        collapsibleDiv.classList.toggle("collapsed");
+        collapsibleDiv.appendChild(newTaskDeleteButton);
+        collapsibleDiv.appendChild(newTaskCreated);
+        collapsibleDiv.appendChild(newTaskDescription);
+    });
+};
+
+export function updateDOM() {
+
+    clearProjectsDiv();
+
+    populateProjects();
+
+    populateTasks();
+
 }

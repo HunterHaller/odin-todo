@@ -8,13 +8,8 @@ h1 {
   text-align: center;
 }
 
-.project{}
-
-.task{
-}
-
 .lowPriority{
-  color: blue;
+  color: rgb(170, 214, 255);
 }
 
 .normalPriority{
@@ -22,7 +17,11 @@ h1 {
 }
 
 .highPriority{
-  color: red;
+  color: rgb(255, 104, 104);
+}
+
+.collapsed{
+  display: none;
 }
 
 .completed {
@@ -36,7 +35,20 @@ img{
   top: 20px;
 }
 
+.downIcon {
+  display: inline;
+  height: 20px;
+}
+
 .trashIcon {
   display: inline;
   height: 20px;
+}
+
+footer{
+  text-align: center;
+}
+
+footer > a{
+  color: lightblue;
 }

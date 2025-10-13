@@ -5,7 +5,7 @@ import "./styles.css";
 import { startEventListeners } from "./js-modules/event-listeners.js";
 import { initialList } from "./js-modules/list-manager.js";
 import { addHeader, updateDOM } from "./js-modules/dom-update.js";
-import { allTasks, allProjects, storageCheck, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
+import { allProjects, storageCheck, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
 
 localStorage.clear();
 console.log("!!!storage cleared!!!")
@@ -20,7 +20,7 @@ if (!localStorage.getItem("returningUser")){
     localStorage.setItem("username", username);
 
     console.log("Creating default list and task...");
-    initialList(); //create the default list
+    initialList(); //Create the default list
 } else {
     console.log("Username already set! User has been here before. Setting instance copy of username to " + localStorage.getItem("username"));
     username = localStorage.getItem("username");
