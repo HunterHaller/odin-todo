@@ -4,16 +4,19 @@
 import "./styles.css";
 import { startEventListeners } from "./js-modules/event-listeners.js";
 import { initialList } from "./js-modules/list-manager.js";
-import { addHeader } from "./js-modules/dom-update.js";
-import { updateDOM } from "./js-modules/dom-update.js";
-import { allTasks, allProjects, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
-import { createTask } from "./js-modules/task-factory.js";
+import { addHeader, updateDOM } from "./js-modules/dom-update.js";
+import { allTasks, allProjects, storageCheck, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
+
+localStorage.clear();
+console.log("!!!storage cleared!!!")
+
+storageCheck();
 
 let username;
 
 //If the page is being loaded for the first time,
 if (!localStorage.getItem("returningUser")){
-    username = prompt("Enter your username:", "Hunter");
+    username = prompt("Enter your username:", "User");
     localStorage.setItem("username", username);
 
     console.log("Creating default list and task...");

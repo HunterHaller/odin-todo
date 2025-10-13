@@ -17,6 +17,7 @@ export function createTask(project, title, id, description, dueMonth, dueDay, du
     const getCompletion = () => completion;
 
     const toggleComplete = function() {
+        console.log("Current completion status: " + completion);
         if (completion == "False") {
             completion = "True";
             console.log("Congratulations! You completed the '" + title + "' task!");

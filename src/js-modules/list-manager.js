@@ -1,20 +1,5 @@
 import { createTask } from "./task-factory.js";
-import { allProjects, allTasks, updateStorageProjectsTasks, updateInstanceProjectsTasks } from "./storage-manager.js";
-
-// localStorage.clear();
-
-console.log("allP and allT have been imported. Printing:");
-console.log("allProjects local = " + allProjects);
-
-if (!localStorage.getItem("allProjects")) {
-    console.log("Adding allProjects to storage for the first time!");
-    updateStorageProjectsTasks();
-    //console.log("Locally, allProjects = " + allProjects)
-    //console.log("Pulled from storage, allProjects reads as " + localStorage.getItem("allProjects"));
-} else {
-    console.log("allProjects found in local storage! As it exists there, it's " + localStorage.getItem("allProjects"));
-    updateInstanceProjectsTasks();
-}
+import { allProjects, allTasks, updateStorageProjectsTasks } from "./storage-manager.js";
 
 //makeProject()
 export function makeProject(projectName) {
@@ -27,23 +12,25 @@ export function makeProject(projectName) {
     console.log("Pulled from storage, allProjects reads as " + JSON.parse(localStorage.getItem("allProjects")));
 }
 
-//addTask - This function adds a task with label "taskName" to the list 
-// identified by "targetList"
-export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority) {
+//addTask(): This function adds a task with title "taskName" to the list identified by "targetList"
+export function addTask(taskProject, taskTitle, taskDescription, taskMonth, taskDay, taskYear, taskPriority) {
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
-    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskMonth, taskDay, taskYear, taskPriority);
-    console.log("Task declared with title '" + newTask.title + "'");
 
-    allTasks.push(newTask.id); //add this new task's unique ID to the allTasks array
-    updateStorageProjectsTasks();
+    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskMonth, taskDay, taskYear, taskPriority, "False");
+
+    console.log("Task declared with title '" + newTask.title + "'");
+    console.log("Completion status at start: " + newTask.completion);
+
+    allTasks.push(newTask.id); //Add this new task's unique ID to the allTasks array.
+    updateStorageProjectsTasks(); //Save the newly updated allTasks list to localStorage.
 
     console.log("Full task readout below:");
     console.log(newTask);
 
-    localStorage.setItem(newTask.id, JSON.stringify(newTask));
+    localStorage.setItem(newTask.id, JSON.stringify(newTask)); //Save the task itself in localStorage.
 
-    return newTask;
+    return newTask; //Is this necessary?
 }
 
 //initialList()
@@ -53,8 +40,9 @@ export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskP
 //  First List" and adds a default task to it.
 export function initialList() {
     let defaultList = makeProject("Default"); //declare a new list called Default
-    addTask("Default", "Do Laundry", "Gotta wash those clothes!", "May 5, 2027", "HIGH");
-    addTask("Default", "Wash dishes", "Gotta wash those dishes!", "May 6, 2027", "LOW");
+    addTask("Default", "Do Laundry", "Gotta wash those clothes!", 5, 5, 2025, "HIGH");
+    addTask("Default", "Wash dishes", "Gotta wash those dishes!", 8, 6, 2027, "LOW"
+    );
 
-    localStorage.setItem("returningUser", "true");
+    localStorage.setItem("returningUser", "True");
 };

@@ -16,8 +16,10 @@ function clearProjectsDiv() {
     document.querySelector("#projectsDiv").textContent = "";
 }
 
+//completeTask: When a checkbox is clicked, toggle the completion status of the attached task.
 function completeTask(taskObj, domElement) {
     console.log("Toggling task " + taskObj.title + "...");
+    console.log("Task completion status before toggling: " + taskObj.completion);
     taskObj.toggleComplete();
     domElement.classList.toggle("completed");
 
@@ -63,15 +65,15 @@ export function updateDOM() {
 
         console.log("Working with task ID " + taskID);
 
-        //this retrieves the stored version of the task object, which is NOT a Task object
-        let newTaskBasicObj = JSON.parse(localStorage.getItem(taskID));
+        //This retrieves the stored version of the task object, which is NOT a Task object (yet)
+        let newBasicObj = JSON.parse(localStorage.getItem(taskID));
 
         //converts the stored regular object into a proper Task object
-        let newTaskObj = createTask(newTaskBasicObj.project, newTaskBasicObj.title, newTaskBasicObj.id, newTaskBasicObj.description, newTaskBasicObj.dueDate, newTaskBasicObj.priority)
+        let newTaskObj = createTask(newBasicObj.project, newBasicObj.title, newBasicObj.id, newBasicObj.description, newBasicObj.dueMonth, newBasicObj.dueDay, newBasicObj.dueYear, newBasicObj.priority, newBasicObj.completion)
 
         //I forgot that in creating a new Task, the "complete" flag always gets set to false.
         //This should fix it:
-        if (newTaskBasicObj.complete == true){
+        if (newBasicObj.complete == true) {
             newTaskObj.complete = true;
         }
 
