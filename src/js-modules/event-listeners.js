@@ -10,6 +10,7 @@ export function startEventListeners() {
     let newTaskButton = document.querySelector("#newTaskButton");
     const dialogForm = document.querySelector("#newTaskDialog");
     const submitTaskButton = document.querySelector("#submitTaskButton");
+    let inputDate;
 
     newProjButton.addEventListener("click", function () {
         let newListName = prompt("Enter a name for your new project:", "My Project");
@@ -38,7 +39,7 @@ export function startEventListeners() {
 
     submitTaskButton.addEventListener("click", function () {
         const newTitle = document.querySelector("#title").value;
-        const newDate = document.querySelector("#dueDate").value;
+        const newDate = inputDate;
         const newPriority = document.querySelector("#priority").value;
         const newDescription = document.querySelector("#description").checked;
         const newAssignedProject = document.querySelector("#projectSelect").value;
@@ -82,5 +83,10 @@ export function startEventListeners() {
             }
 
         }
+    })
+    
+
+    document.querySelector("#dueDate").addEventListener("change", function() {
+        inputDate = new Date(this.value);
     })
 }

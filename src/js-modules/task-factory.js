@@ -2,7 +2,8 @@
 
 import { format, formatDistanceToNow } from "date-fns"; // for time formatting
 
-export function createTask(project, title, id, description, dueMonth, dueDay, dueYear, priority, completion) {
+//export function createTask(project, title, id, description, dueMonth, dueDay, dueYear, priority, completion) {
+export function createTask(project, title, id, description, dueDate, priority, completion) {
 
     //New values:
     const timeCreated = new Date(); // Assigns the time created as the current date/time at moment of creation.
@@ -10,7 +11,8 @@ export function createTask(project, title, id, description, dueMonth, dueDay, du
     //Methods:
     const timeSinceCreated = () => "Created " + formatDistanceToNow(timeCreated) + " ago."
     
-    const printStandardDate = () => format(new Date(dueYear, dueMonth, dueDay), 'MM/dd/yyyy');
+    //const printStandardDate = () => format(new Date(dueYear, dueMonth, dueDay), 'MM/dd/yyyy');
+    const printStandardDate = () => format(dueDate, 'MM/dd/yyyy');
     
     //Note that this is necessary to accurately pull values that have changed! 
     //Just grabbing the basic completion value returns its original value only!
@@ -29,7 +31,9 @@ export function createTask(project, title, id, description, dueMonth, dueDay, du
         }
     }
 
-    return { project, title, id, description, dueMonth, dueDay, dueYear, completion, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
+    //return { project, title, id, description, dueMonth, dueDay, dueYear, completion, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
+    return { project, title, id, description, dueDate, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
+
 }
 
 //Test task! Move this to index.js to test.

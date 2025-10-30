@@ -13,14 +13,17 @@ export function makeProject(projectName) {
 }
 
 //addTask(): This function adds a task with title "taskName" to the list identified by "targetList"
-export function addTask(taskProject, taskTitle, taskDescription, taskMonth, taskDay, taskYear, taskPriority) {
+export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskPriority) {
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
 
-    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskMonth, taskDay, taskYear, taskPriority, "False");
+    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskDate, taskPriority, "False");
 
     console.log("Task declared with title '" + newTask.title + "'");
-    console.log("Completion status at start: " + newTask.completion);
+    console.log("Completion status at start: " + newTask.getCompletion());
+
+    console.log("Provided due date: " + taskDate)
+    console.log("Task's due date: " + newTask.dueDate)
 
     allTasks.push(newTask.id); //Add this new task's unique ID to the allTasks array.
     updateStorageProjectsTasks(); //Save the newly updated allTasks list to localStorage.
@@ -40,9 +43,8 @@ export function addTask(taskProject, taskTitle, taskDescription, taskMonth, task
 //  First List" and adds a default task to it.
 export function initialList() {
     let defaultList = makeProject("Default"); //declare a new list called Default
-    addTask("Default", "Do Laundry", "Gotta wash those clothes!", 5, 5, 2025, "HIGH");
-    addTask("Default", "Wash dishes", "Gotta wash those dishes!", 8, 6, 2027, "LOW"
-    );
+    addTask("Default", "Do Laundry", "Gotta wash those clothes!", new Date("2025-11-23"), "HIGH");
+    addTask("Default", "Wash dishes", "Gotta wash those dishes!", new Date("2027-03-25"), "LOW");
 
     localStorage.setItem("returningUser", "True");
 };
