@@ -90,6 +90,7 @@ function populateTasks() {
 
         let newTaskCheckbox = document.createElement("input")
 
+        newTaskObj.priority = newTaskObj.priority.toUpperCase();
         console.log("This task's priority is " + newTaskObj.priority);
         //Assign appropriate priority class
         switch (newTaskObj.priority) {
