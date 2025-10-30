@@ -80,7 +80,7 @@ function populateTasks() {
         let newBasicObj = JSON.parse(localStorage.getItem(taskID));
 
         //converts the stored regular object into a proper Task object
-        let newTaskObj = createTask(newBasicObj.project, newBasicObj.title, newBasicObj.id, newBasicObj.description, newBasicObj.dueDate, newBasicObj.priority, newBasicObj.completion)
+        let newTaskObj = createTask(newBasicObj.project, newBasicObj.title, newBasicObj.id, newBasicObj.description, newBasicObj.createdDate, newBasicObj.dueDate, newBasicObj.priority, newBasicObj.completion)
 
         //I forgot that in creating a new Task, the "complete" flag always gets set to false.
         //This should fix it:

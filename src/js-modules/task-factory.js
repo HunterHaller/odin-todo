@@ -3,13 +3,13 @@
 import { format, formatDistanceToNow } from "date-fns"; // for time formatting
 
 //export function createTask(project, title, id, description, dueMonth, dueDay, dueYear, priority, completion) {
-export function createTask(project, title, id, description, dueDate, priority, completion) {
+export function createTask(project, title, id, description, createdDate, dueDate, priority, completion) {
 
     //New values:
-    const timeCreated = new Date(); // Assigns the time created as the current date/time at moment of creation.
+    //const timeCreated = new Date(); // Assigns the time created as the current date/time at moment of creation.
 
     //Methods:
-    const timeSinceCreated = () => "Created " + formatDistanceToNow(timeCreated) + " ago."
+    const timeSinceCreated = () => "Created " + formatDistanceToNow(createdDate) + " ago."
     
     //const printStandardDate = () => format(new Date(dueYear, dueMonth, dueDay), 'MM/dd/yyyy');
     const printStandardDate = () => format(dueDate, 'MM/dd/yyyy');
@@ -32,7 +32,7 @@ export function createTask(project, title, id, description, dueDate, priority, c
     }
 
     //return { project, title, id, description, dueMonth, dueDay, dueYear, completion, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
-    return { project, title, id, description, dueDate, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
+    return { project, title, id, description, createdDate, dueDate, priority, timeSinceCreated, printStandardDate, toggleComplete, getCompletion }
 
 }
 

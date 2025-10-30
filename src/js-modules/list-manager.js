@@ -17,7 +17,7 @@ export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskP
     //Find list with name "targetProject"
     //Add task with label "taskTitle" to that list.
 
-    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, taskDate, taskPriority, "False");
+    const newTask = createTask(taskProject, taskTitle, crypto.randomUUID().substring(0, 5), taskDescription, new Date(), taskDate, taskPriority, "False");
 
     console.log("Task declared with title '" + newTask.title + "'");
     console.log("Completion status at start: " + newTask.getCompletion());
