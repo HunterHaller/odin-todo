@@ -33,9 +33,14 @@ function populateProjects() {
 
     allProjects.forEach((project) => {
 
+        //Create a new div for the DOM with class "project" and id set to the project's title minus all spaces
         let newProjectDiv = document.createElement("div");
         newProjectDiv.setAttribute("class", "project");
-        newProjectDiv.setAttribute("id", project.replaceAll(" ", ""));
+
+        let projectIDName = project.replaceAll(" ", "");
+        projectIDName = projectIDName.replaceAll("(", "");
+        projectIDName = projectIDName.replaceAll(")", "");
+        newProjectDiv.setAttribute("id", projectIDName);
 
         let newProjectHeader = document.createElement("h1");
         newProjectHeader.textContent = project;
@@ -44,21 +49,21 @@ function populateProjects() {
         newProjectDiv.appendChild(newProjectHeader);
 
         //Also add project to the dropdown list for adding new tasks
-        let projectIDName = project.replaceAll(" ", "");
-        projectIDName = projectIDName.replaceAll("(", "");
-        projectIDName = projectIDName.replaceAll(")", "");
+        //let projectIDName = project.replaceAll(" ", "");
+        //projectIDName = projectIDName.replaceAll("(", "");
+        //projectIDName = projectIDName.replaceAll(")", "");
         if (!document.querySelector("#" + projectIDName + "InList")) {
 
             let newProjectOption = document.createElement("option");
             newProjectOption.textContent = project;
             newProjectOption.setAttribute("value", project);
-            newProjectOption.id = (project.replaceAll(" ", "") + "InList");
+            newProjectOption.id = (projectIDName + "InList");
 
             dropdownProjects.appendChild(newProjectOption);
 
             console.log("Added " + project + " to new task dialog!")
         } else {
-            console.log("Item already present in dialog! Skipping...")
+            console.log("Project " + projectIDName + " already present in dialog! Skipping...")
         }
     });
 }
@@ -83,7 +88,10 @@ function populateTasks() {
             newTaskObj.complete = true;
         }
 
-        let parentDiv = document.querySelector("#" + newTaskObj.project.replaceAll(" ", ""));
+        let projectIDName = newTaskObj.project.replaceAll(" ", "");
+        projectIDName = projectIDName.replaceAll("(", "");
+        projectIDName = projectIDName.replaceAll(")", "");
+        let parentDiv = document.querySelector("#" + projectIDName);
 
         let newTaskDiv = document.createElement("div");
         newTaskDiv.classList.add("task");
