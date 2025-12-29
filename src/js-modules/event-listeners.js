@@ -55,7 +55,7 @@ export function startEventListeners() {
         console.log("You clicked on a " + target.className);
 
         if (target.classList.contains("downIcon")) {
-            target.classList.toggle("collapsed");
+            //target.classList.toggle("collapsed");
             var content = target.nextElementSibling;
             if (content.style.display === "block") {
                 content.style.display = "none";

@@ -156,6 +156,7 @@ function populateTasks() {
 
         let newTaskDate = document.createElement("p");
         newTaskDate.textContent = newTaskObj.printStandardDate();
+        newTaskDate.classList.toggle("dueDate");
 
         let collapsibleDiv = document.createElement("div");
 
