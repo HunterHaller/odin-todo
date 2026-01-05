@@ -8,48 +8,52 @@
 </head>
 
 <body>
-    <div id="content">
-        <div id="appName">yet another todo list!</div>
-        <div id="headerDiv"></div>
-        <div id="projectsDiv"></div>
-        <div id="newTask">
-            <h2>NEED A NEW TASK?</h2>
-            <img id="newTaskButton" class="plusButton" src="./img/plus-box-outline.svg"
-                alt="Image of a plus symbol inside of a square">
-            <dialog id="newTaskDialog">
-                <form action="" method="dialog" class="hidden">
-                    <label for="title">Task:</label>
-                    <input type="text" id="title" name="title" placeholder="Walk the dog" autofocus>
-                    <br>
-                    <label for="dueDate">Due date:</label>
-                    <input type="date" id="dueDate" name="dueDate">
-                    <br>
-                    <label for="priority">Priority:</label>
-                    <select id="priority" name="priority">
-                        <option value="low">Low</option>
-                        <option value="normal">Normal</option>
-                        <option value="high">High</option>
-                    </select>
-                    <br>
-                    <label for="description">Task description:</label>
-                    <input type="text" id="description" name="description" placeholder="The dog needs walking!">
-                    <br>
-                    <label for="projectSelect">Assign to project:</label>
-                    <select id="projectSelect" name="projectSelect">
-                    </select>
-                    <br>
-                    <button id="submitTaskButton">Submit</button>
-                </form>
-            </dialog>
+    <div id="wrapper">
+        <div id="sidebar">
+            <div id="appName">yet another todo list!</div>
+            <div id="newTask" class="buttonSection">
+                <h2>NEED A NEW TASK?</h2>
+                <img id="newTaskButton" class="plusButton" src="./img/plus-box-outline.svg"
+                    alt="Image of a plus symbol inside of a square">
+                <dialog id="newTaskDialog">
+                    <form action="" method="dialog" class="hidden" id="taskForm">
+                        <label for="title">Task:</label>
+                        <input type="text" id="title" name="title" placeholder="Walk the dog" autofocus>
+                        <br>
+                        <label for="dueDate">Due date:</label>
+                        <input type="date" id="dueDate" name="dueDate">
+                        <br>
+                        <label for="priority">Priority:</label>
+                        <select id="priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                        </select>
+                        <br>
+                        <label for="description">Task description:</label>
+                        <input type="text" id="description" name="description" placeholder="The dog needs walking!">
+                        <br>
+                        <label for="projectSelect">Assign to project:</label>
+                        <select id="projectSelect" name="projectSelect">
+                        </select>
+                        <br>
+                        <button id="submitTaskButton">Submit</button>
+                    </form>
+                </dialog>
+            </div>
+            <div id="newProj" class="buttonSection">
+                <h2>NEED A NEW PROJECT?</h2>
+                <img id="newProjButton" class="plusButton" src="./img/plus-box-outline.svg"
+                    alt="Image of a plus symbol inside of a square">
+            </div>
         </div>
-        <div id="newProj">
-            <h2>NEED A NEW PROJECT?</h2>
-            <img id="newProjButton" class="plusButton" src="./img/plus-box-outline.svg"
-                alt="Image of a plus symbol inside of a square">
+        <div id="content">
+            <div id="headerDiv"></div>
+            <div id="projectsDiv"></div>
         </div>
     </div>
     <footer>
-        <p>Coded by Hunter Haller, 2026</p>
+        <p>Hand-coded by Hunter Haller, 2026</p>
         <a target="_blank" href="https://icons8.com/icon/26139/down-button">Down Button</a> icon by <a target="_blank"
             href="https://icons8.com">Icons8</a>
     </footer>

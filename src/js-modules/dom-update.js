@@ -168,9 +168,10 @@ function populateTasks() {
 
         newTaskDiv.appendChild(collapsibleDiv);
         collapsibleDiv.classList.toggle("collapsed");
-        collapsibleDiv.appendChild(newTaskDeleteButton);
-        collapsibleDiv.appendChild(newTaskCreated);
         collapsibleDiv.appendChild(newTaskDescription);
+        collapsibleDiv.appendChild(newTaskCreated);
+        collapsibleDiv.appendChild(newTaskDeleteButton);
+        
     });
 };
 

@@ -41,10 +41,17 @@ export function startEventListeners() {
         const newTitle = document.querySelector("#title").value;
         const newDate = inputDate;
         const newPriority = document.querySelector("#priority").value;
-        const newDescription = document.querySelector("#description").checked;
+        const newDescription = document.querySelector("#description").value;
         const newAssignedProject = document.querySelector("#projectSelect").value;
 
         addTask(newAssignedProject, newTitle, newDescription, newDate, newPriority);
+
+        document.querySelector("#title").textContent = "";
+        document.querySelector("#priority").textContent = "";
+        document.querySelector("#description").textContent = "";
+        document.querySelector("#projectSelect").textContent = "";
+
+        document.querySelector("#taskForm").reset();
 
         updateDOM();
     })
@@ -57,10 +64,10 @@ export function startEventListeners() {
         if (target.classList.contains("downIcon")) {
             //target.classList.toggle("collapsed");
             var content = target.nextElementSibling;
-            if (content.style.display === "block") {
+            if (content.style.display === "flex") {
                 content.style.display = "none";
             } else {
-                content.style.display = "block";
+                content.style.display = "flex";
             }
         }
 

@@ -42,9 +42,9 @@ export function addTask(taskProject, taskTitle, taskDescription, taskDate, taskP
 //  first usage of the page), this function creates an initial list called "My
 //  First List" and adds a default task to it.
 export function initialList() {
-    let defaultList = makeProject("Default"); //declare a new list called Default
-    addTask("Default", "Do Laundry", "Gotta wash those clothes!", new Date("2025-11-23"), "HIGH");
-    addTask("Default", "Wash dishes", "Gotta wash those dishes!", new Date("2027-03-25"), "LOW");
+    let defaultList = makeProject("Default Project"); //declare a new list called Default
+    addTask("Default Project", "Do Laundry", "Gotta wash those clothes!", new Date("2025-11-23"), "HIGH");
+    addTask("Default Project", "Wash dishes", "Gotta wash those dishes!", new Date("2027-03-25"), "LOW");
 
     localStorage.setItem("returningUser", "True");
 };

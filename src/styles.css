@@ -4,6 +4,11 @@
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+html {
+  --section-background-color: rgba(247, 247, 247, 0.349);
+  --section-border-radius: 10px;
+}
+
 body {
   background-color: #1D546D;
   color: white;
@@ -14,12 +19,42 @@ body {
   min-height: 100vh;
 }
 
-#content {
+#sidebar{
+  border-right: 1px rgb(110, 110, 110) solid;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  min-width: 290px;
+}
+
+.buttonSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--section-background-color);
+  border-radius: var(--section-border-radius);
+  width: 250px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+
   flex: 1 0 auto;
 }
 
+#content {
+  flex: 2 0 auto;
+}
+
 #appName {
-  padding: 10px;
+  padding: 30px;
 }
 
 h1 {
@@ -32,29 +67,6 @@ dialog {
 
 dialog::backdrop {
   background-color: rgba(26, 26, 26, 0.877)
-}
-
-.lowPriority{
-  color: rgb(170, 214, 255);
-}
-
-.normalPriority{
-  color: yellow;
-}
-
-.highPriority{
-  color: rgb(255, 167, 167);
-}
-
-.collapsed{
-  display: none;
-
-  width: 100%;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: gray;
 }
 
 img{
@@ -103,15 +115,17 @@ footer > p{
 }
 
 .project {
-  background-color: rgba(247, 247, 247, 0.349);
-  border-radius: 10px;
-  padding-bottom: 30px;
+  background-color: var(--section-background-color);
+  border-radius: var(--section-border-radius);
+  padding: 0 0 30px 0;
   margin-bottom: 30px;
 
-  width: 300px;
+  min-width: 300px;
+  max-width: 40%;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap:20px;
 }
 
@@ -121,8 +135,44 @@ footer > p{
   justify-content: space-around;
   flex-wrap: wrap;
   align-items: center;
+
+  background-color: #434446;
+  border-radius: 10px;
+  width: 90%;
 }
 
 .dueDate {
   display: inline;
+}
+
+.lowPriority{
+  color: rgb(170, 214, 255);
+}
+
+.normalPriority{
+  color: yellow;
+}
+
+.highPriority{
+  color: rgb(255, 167, 167);
+}
+
+.collapsed{
+  display: none;
+  padding-bottom: 15px;
+
+  /* Flex stuff:*/
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-around;
+}
+
+.collapsed > p {
+  padding-left: 10px;
+  margin: 9px 0;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
