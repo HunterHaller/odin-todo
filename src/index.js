@@ -7,8 +7,8 @@ import { initialList } from "./js-modules/list-manager.js";
 import { addHeader, updateDOM } from "./js-modules/dom-update.js";
 import { allProjects, storageCheck, updateInstanceProjectsTasks, updateStorageProjectsTasks } from "./js-modules/storage-manager.js";
 
-localStorage.clear();
-console.log("!!!storage cleared!!!")
+//localStorage.clear();
+//console.log("!!!storage cleared!!!")
 
 storageCheck();
 
